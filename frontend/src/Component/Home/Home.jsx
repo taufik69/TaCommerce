@@ -1,7 +1,7 @@
 import React from "react";
 
 const Home = () => {
-  return ~(
+  return (
     <div className="bg-gray-100">
       <div className="mx-auto grid max-w-6xl  grid-cols-1 gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-32">
         <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">

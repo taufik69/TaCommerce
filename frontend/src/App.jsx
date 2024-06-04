@@ -3,6 +3,8 @@ import RootLayout from "./Component/RootLayout/RootLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./Component/Home/Home";
 import Error from "./Component/Error/Error";
+import Cart from "./Component/Cart/Cart";
+import NotFound from "./Component/NotFound/NotFound";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,6 +18,14 @@ const router = createBrowserRouter([
       {
         path: "/error",
         element: <Error />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
+      },
+      {
+        path: "/notFound",
+        element: <NotFound />,
       },
     ],
   },
