@@ -1,10 +1,12 @@
 const cloudinary = require("cloudinary").v2;
-require("dotenv").config();
+console.log("CLOUD_NAME:", process.env.CLOUD_NAME); // Debugging statement
+console.log("API_KEY:", process.env.CLOUDINARY_API_KEY); // Debugging statement
+console.log("API_SECRET:", process.env.CLOUDINARY_API_SECRET); // Debugging statement
 cloudinary.config({
   secure: true,
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRECT,
+  api_secret: "oCl8_CCXmV81BR8Lwz8yvnYkL00",
 });
 
 const uploadImage = async (imagePath) => {
@@ -20,7 +22,7 @@ const uploadImage = async (imagePath) => {
     // Upload the image
     const result = await cloudinary.uploader.upload(imagePath, options);
     console.log(result);
-    return result.public_id;
+    // return result;
   } catch (error) {
     console.error(error);
   }
