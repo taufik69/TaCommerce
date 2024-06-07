@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import { LuShoppingCart } from "react-icons/lu";
 const Navbar = () => {
   return (
     <div>
@@ -62,6 +62,11 @@ const Navbar = () => {
                 ></path>
               </svg>
             </button>
+          </div>
+          <div>
+            <span className="cartIcon">
+              <LuShoppingCart className="text-2xl" />
+            </span>
           </div>
           <div
             className="hidden w-full items-center justify-between md:order-1 md:flex md:w-auto"
