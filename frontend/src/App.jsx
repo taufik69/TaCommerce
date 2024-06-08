@@ -5,6 +5,9 @@ import Home from "./Component/Home/Home";
 import Error from "./Component/Error/Error";
 import Cart from "./Component/Cart/Cart";
 import NotFound from "./Component/NotFound/NotFound";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +34,12 @@ const router = createBrowserRouter([
   },
 ]);
 const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <div>
+      <ToastContainer />
+      <RouterProvider router={router}> </RouterProvider>
+    </div>
+  );
 };
 
 export default App;

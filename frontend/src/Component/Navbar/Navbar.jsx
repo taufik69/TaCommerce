@@ -23,7 +23,7 @@ const Navbar = () => {
             </svg>
 
             <span className="self-center whitespace-nowrap text-xl font-semibold">
-              Termcode
+              TaCommerce
             </span>
           </a>
           <div className="mt-2 sm:mt-0 sm:flex md:order-2">

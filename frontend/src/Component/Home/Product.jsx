@@ -1,6 +1,6 @@
 import React from "react";
 
-const Product = ({ ProductItem }) => {
+const Product = ({ ProductItem, onCart }) => {
   return (
     <div>
       <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl hover:transform hover:scale-105 duration-300 ">
@@ -48,7 +48,9 @@ const Product = ({ ProductItem }) => {
                 />
               </svg>
 
-              <button className="text-sm">Add to cart</button>
+              <button className="text-sm" onClick={() => onCart(ProductItem)}>
+                Add to cart
+              </button>
             </div>
           </div>
         </div>

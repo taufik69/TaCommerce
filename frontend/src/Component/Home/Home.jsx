@@ -3,9 +3,20 @@ import { useGetAllProductQuery } from "../Features/Api/ProductApi.js";
 import LoadingPlaceholder from "./LoadingPlaceholder.jsx";
 import Error from "../Error/Error.jsx";
 import Product from "./Product.jsx";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart } from "../Features/AllSlice/cartSlice.js";
 const Home = () => {
+  const dispatch = useDispatch();
+
   const { data, error, isLoading } = useGetAllProductQuery();
 
+  /**
+   * todo : handleaddToCart funtion implement
+   * @parmas({item})
+   */
+  const handleaddToCart = (item) => {
+    dispatch(addToCart(item));
+  };
   let content = null;
   let totalProducts = 0;
   if (isLoading) {
@@ -17,7 +28,9 @@ const Home = () => {
   } else if (error) {
     content = <Error />;
   } else if (data) {
-    content = data?.products.map((item) => <Product ProductItem={item} />);
+    content = data?.products.map((item) => (
+      <Product onCart={handleaddToCart} ProductItem={item} />
+    ));
   }
 
   return (
