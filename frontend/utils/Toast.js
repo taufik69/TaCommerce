@@ -18,9 +18,12 @@ export const sucessToast = (
   });
 };
 
-export const ErrorToast = (content = "Something is Error") => {
+export const ErrorToast = (
+  content = "Something is Error",
+  postion = "top-right"
+) => {
   toast.warn(content, {
-    position: "top-center",
+    position: postion,
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,

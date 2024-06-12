@@ -1,7 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { LuShoppingCart } from "react-icons/lu";
+import { getTotal } from "../Features/AllSlice/cartSlice.js";
+import { useSelector, useDispatch } from "react-redux";
 const Navbar = () => {
+  const dispatch = useDispatch();
+
+  const { totalQunatity } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(getTotal());
+
+    return () => {
+      dispatch(getTotal());
+    };
+  }, [dispatch]);
   return (
     <div>
       <nav className="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
@@ -64,7 +77,7 @@ const Navbar = () => {
             </button>
           </div>
           <div>
-            <span className="cartIcon">
+            <span className="cartIcon" porductAmount={totalQunatity}>
               <LuShoppingCart className="text-2xl" />
             </span>
           </div>

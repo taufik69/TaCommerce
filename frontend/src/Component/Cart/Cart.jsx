@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeCartItem } from "../Features/AllSlice/cartSlice";
+import {
+  removeCartItem,
+  decrementProduct,
+  incrementProduct,
+  getTotal,
+} from "../Features/AllSlice/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { cartItem } = useSelector((state) => state.cart);
+
+  const { cartItem, totalAmount, totalQunatity } = useSelector(
+    (state) => state.cart
+  );
+
+  useEffect(() => {
+    dispatch(getTotal());
+
+    return () => {
+      dispatch(getTotal());
+    };
+  }, [dispatch, cartItem]);
 
   /**
    * todo: handleRemove funtion
@@ -12,6 +28,21 @@ const Cart = () => {
    */
   const handleRemove = (item) => {
     dispatch(removeCartItem(item));
+  };
+  /**
+   * todo : handleDecrement funtion implementation
+   * @parmam({item})
+   */
+  const handleDecrement = (item) => {
+    dispatch(decrementProduct(item));
+  };
+
+  /**
+   * todo : handleIncrement funtion implementation
+   * @parmam({item})
+   */
+  const handleIncrement = (item) => {
+    dispatch(incrementProduct(item));
   };
 
   return (
@@ -40,23 +71,29 @@ const Cart = () => {
                   </div>
                   <div className="mt-4 flex justify-between sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                     <div className="flex items-center border-gray-100">
-                      <span className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50">
-                        {" "}
-                        -{" "}
+                      <span
+                        onClick={() => handleDecrement(product)}
+                        className="cursor-pointer rounded-l bg-gray-100 py-1 px-3.5 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                      >
+                        -
                       </span>
-                      <input
-                        className="h-8 w-8 border bg-white text-center text-xs outline-none"
-                        type="text"
-                        value={product.cartQuantity}
-                        min="1"
-                      />
-                      <span className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50">
-                        {" "}
-                        +{" "}
+                      <p className="h-8 w-8 border bg-white text-center text-xs outline-none flex items-center justify-center">
+                        {product.cartQuantity}
+                      </p>
+                      <span
+                        onClick={() => handleIncrement(product)}
+                        className="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50"
+                      >
+                        +
                       </span>
                     </div>
                     <div className="flex items-center space-x-4">
-                      <p className="text-sm">{product.price}$</p>
+                      <p className="text-sm">
+                        {parseFloat(
+                          product.price * product.cartQuantity
+                        ).toFixed(1)}
+                        $
+                      </p>
                       <span onClick={() => handleRemove(product)}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +120,9 @@ const Cart = () => {
           <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <div className="mb-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
-              <p className="text-gray-700">$129.99</p>
+              <p className="text-gray-700">
+                ${parseFloat(totalAmount.toFixed(2))}
+              </p>
             </div>
             <div className="flex justify-between">
               <p className="text-gray-700">Shipping</p>
@@ -93,7 +132,9 @@ const Cart = () => {
             <div className="flex justify-between">
               <p className="text-lg font-bold">Total</p>
               <div className="">
-                <p className="mb-1 text-lg font-bold">$134.98 USD</p>
+                <p className="mb-1 text-lg font-bold">
+                  ${parseFloat(totalAmount.toFixed(0)) + 4.99}USD
+                </p>
                 <p className="text-sm text-gray-700">including VAT</p>
               </div>
             </div>
