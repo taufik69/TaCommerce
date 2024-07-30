@@ -22,4 +22,12 @@ router.post("/upload", (req, res, next) => {
   });
 });
 
+router.route("/registration").post(async (req, res) => {
+  try {
+    console.log("hello");
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = router;
