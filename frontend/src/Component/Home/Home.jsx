@@ -4,7 +4,7 @@ import LoadingPlaceholder from "./LoadingPlaceholder.jsx";
 import Error from "../Error/Error.jsx";
 import Product from "./Product.jsx";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart } from "../Features/AllSlice/cartSlice.js";
+import { addToCart, getTotal } from "../Features/AllSlice/cartSlice.js";
 const Home = () => {
   const dispatch = useDispatch();
 
@@ -16,6 +16,7 @@ const Home = () => {
    */
   const handleaddToCart = (item) => {
     dispatch(addToCart(item));
+    dispatch(getTotal());
   };
   let content = null;
   let totalProducts = 0;

@@ -10,11 +10,7 @@ const Navbar = () => {
 
   useEffect(() => {
     dispatch(getTotal());
-
-    return () => {
-      dispatch(getTotal());
-    };
-  }, [dispatch]);
+  }, [dispatch, totalQunatity]);
   return (
     <div>
       <nav className="fixed top-0 left-0 z-20 w-full border-b border-gray-200 bg-white py-2.5 px-6 sm:px-4">
