@@ -5,6 +5,8 @@ const multer = require("multer");
 const multerUpload = require("../utils/Multer.js");
 const cloudinary = require("../utils/Cloudinary.js");
 const fs = require("fs");
+const registrationValidation = require("../utils/registratrionValidation.js");
+
 router.post("/upload", (req, res, next) => {
   multerUpload(req, res, async function (err) {
     if (err) {
@@ -24,7 +26,13 @@ router.post("/upload", (req, res, next) => {
 
 router.route("/registration").post(async (req, res) => {
   try {
-    console.log("hello");
+    const { value, error } = registrationValidation(req.body);
+    if (error) {
+      return res.status(401).json({
+        message: error.details[0].message,
+      });
+    }
+    console.log(value);
   } catch (error) {
     console.log(error);
   }
